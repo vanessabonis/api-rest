@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import apirest.completo.entities.User;
 import apirest.completo.repositories.UserRepository;
+import apirest.completo.services.exceptions.ResourceNotFoundException;
 
 //registrar como componente do spring
 @Service
@@ -26,7 +27,7 @@ public class UserService {
 	public User findById(Long id) {
 		
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 		
 	}
 	
