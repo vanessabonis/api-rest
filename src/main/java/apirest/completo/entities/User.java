@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "tb_user")
@@ -32,6 +34,7 @@ public class User implements Serializable {
 	private String celular;
 	private String password;
 	
+	@JsonIgnore //resolve o problema do loop
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	
